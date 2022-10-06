@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 1</title>
+    <script>
+        function show_text(){
+            // this는 이벤트 발생한 객체를 가리킴
+            var msg = document.querySelector("#msg")
+            // this.InnerText는 마우스가 올라간< h1>의 글자 
+            msg.innerText = this.innerText
+        }
+        function my_load(){
+            var h1_arr = document.querySelectorAll("h1") // 태그검색
+            for(var i=0; i <h1_arr.length; i++){
+                h1_arr[i].onclick = show_text
+            }
+            
+        }
+        // console.log( my_load ) 
+        window.onload = my_load // 이벤트 핸들러 등록
+        // my_load() // 자바스크립트는 위에서 아래로 순차적으로 실행하는데 onload라는 콜백이 없으면 script까지만 읽어오고 실행하기 때문에 h1태그를 찾지 못하고 오류가 발생함.
+    </script>
+</head>
+<body>
+    <h1>Do it!</h1>
+    <h1>Do it! 2</h1>
+    <h1>Do it! 3</h1>
+    <img src="" alt = "공부하는 이미지">
+    <div id="msg"></div>
+</body>
+</html>
