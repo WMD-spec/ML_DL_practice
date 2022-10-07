@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom 3</title>
+    <script>
+        var count = 0
+        function show_count(){
+            document.querySelector("#msg").innerHTML = "<b>"+count+"</b>"
+
+        }
+        function increase(){
+            count++
+            show_count()
+        }
+        function decrease(){
+            count--
+            show_count()
+        }
+        // 현재 웹페이지 로딩 완료시 자동실행 함수등록
+        // window.onload = function(){
+        //     document.querySelector("#dec").onclick = decrease
+        // }
+        function fn_show_msg(text){
+            document.querySelector("#msg").innerHTML = text
+        }
+        function fn_img(){
+            var img = document.querySelector("#img1")
+            var src = img.getAttribute("src")
+            fn_show_msg(src)
+            img.setAttribute("src","https://imgnews.pstatic.net/image/upload/item/2018/08/29/183426027_%25BD%25C5%25B0%25ED%25B9%25E8%25B3%25CA.png")
+        }
+        // 누를 때마다 색깔 변경
+        var colorIndex = 0
+        var colors = ["red","blue","cyan","green"]
+        function fn_change_color(){
+            var msg = document.querySelector("#msg")
+            msg.style.color = colors[colorIndex]
+            colorIndex++  // 1증가
+            colorIndex %= colors.length  // n나누기 나머지 저장
+        }
+    </script>
+</head>
+<body>
+    <button id="inc" onclick="increase()">증가</button>
+    <button id="dec">감소</button>
+    <button id="img_btn" onclick="fn_img()">이미지 접근</button>
+    <button id="chg_btn" onclick="fn_change_color()">색깔변경</button>
+
+    <div id="msg"></div>
+    <img id="img1" src="https://imgnews.pstatic.net/image/upload/item/2018/11/27/175236270_PC_%25BF%25EC%25C3%25F8%25B9%25E8%25B3%25CA_%25B1%25B8%25B5%25B6%25C8%25B0%25BC%25BA%25C8%25AD.png">
+    <script>
+        document.querySelector("#dec").onclick = decrease
+
+    </script>
+</body>
+</html>
