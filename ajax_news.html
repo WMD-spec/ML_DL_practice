@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+
+                    // <a href="원본기사url">기사제목</a>
+        function get_weather(){
+            //기존 msg내 정보 모두삭제 
+            $("#msg").empty()
+            
+            $.ajax({
+                url: "chosun_news_all.xml", // 데이터 경로
+                success: function(data){ // 통신성공시 실행 함수, data는 서버에서 수신한 값
+                    var datas = $(data).find("item")
+                    for(var i=0; i<datas.length; i++){
+                        var dt = $(datas[i]) // <data>를 순서대로 접근
+                        var title = dt.find("title").text()
+                        var link = dt.find("link").text() //기사 url
+                        title = $("<a>"+title+"</a>")
+                        title.attr("href",link)
+                        // $("#msg").append( title )
+                        // $("#msg").append( "<br>" )
+                        $("#msg").append( $("<p></p>") .append(title) )
+                    } // end for
+                }
+            })
+        }
+        $(function(){// 페이지로딩 후 자동실행함수
+            get_weather()
+            $("#weather_btn").click(function(){
+                get_weather()
+            })
+
+        })
+    </script>
+    <title>조선일보 RSS</title>
+</head>
+<body>
+
+    <button id="weather_btn">조선일보 RSS</button>
+    <div id="msg"></div>
+    
+</body>
+</html>
